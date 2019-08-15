@@ -21,19 +21,23 @@ app.get('/', (req, res) => {
 app.get('/send-email', (req,res) => {
     
     //Get Variables from query string in the search bar
-    const { sender, topic, text, name } = req.query; 
+    const { sender, topic, text, name, type } = req.query; 
 
     //Sendgrid Data Requirements
-    const msg = {
+        const msg = type === 'SENDING'? {
         to: process.env.REACT_APP_EMAIL, 
         from: sender,
         subject: `${name} wants to know about: ${topic}`,
-        text: text
-    }
-
+        text: text }:{
+            to: sender, 
+            from: 'info@avnsmotors.com',
+            subject: `Re: ${topic}`,
+            text: 'Thank you for contacting us. We will contact you as soon as possible.'
+        };
+   
     //Send Email
     sgMail.send(msg)
-    .then((msg) => console.log(text));
+    .then((msg) => console.log('SENT'));
 });
 
 // to access server run 'nodemon index.js' then click here: http://localhost:4000/
