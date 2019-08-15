@@ -3,6 +3,8 @@ const express = require('express'); //needed to launch server
 const cors = require('cors'); //needed to disable sendgrid security
 const sgMail = require('@sendgrid/mail'); //sendgrid library to send emails 
 
+const PORT = process.env.PORT || 5000
+
 
 const app = express(); //alias from the express function
 
@@ -35,4 +37,4 @@ app.get('/send-email', (req,res) => {
 });
 
 // to access server run 'nodemon index.js' then click here: http://localhost:4000/
-app.listen(5000, () => console.log("Running on Port 5000")); 
+app.listen(PORT, () => console.log("Running on Port 5000")); 
