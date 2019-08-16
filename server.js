@@ -27,7 +27,7 @@ app.get('/send-email', (req,res) => {
         const msg = {
         to: patientemail, 
         from: process.env.REACT_APP_EMAIL,
-        subject: 'GlucoBasal Assistance Program',//`${name} wants to know about: ${topic}`,
+        subject: 'GlucoBasal Assistance Program',
         text: `Dear ${name}
         Congratulations! You are eligible for the GlucoBasal Assistance Program! 
         This will allow you to receive up to a 30 day supply of your GlucoBasal insulin at a participating pharmacy. 
