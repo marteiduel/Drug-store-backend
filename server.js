@@ -50,5 +50,5 @@ app.get('/send-email', (req,res) => {
     .then((msg) => console.log('SENT'));
 });
 
-// to access server run 'nodemon index.js' then click here: http://localhost:5000/
+
 app.listen(PORT, () => console.log("Running on Port 5000"));
