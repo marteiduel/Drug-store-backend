@@ -21,24 +21,34 @@ app.get('/', (req, res) => {
 app.get('/send-email', (req,res) => {
     
     //Get Variables from query string in the search bar
-    const { sender, topic, text, name, type } = req.query; 
+    const { patientemail, name } = req.query; 
 
     //Sendgrid Data Requirements
-        const msg = type === 'SENDING'? {
-        to: process.env.REACT_APP_EMAIL, 
-        from: sender,
-        subject: `${name} wants to know about: ${topic}`,
-        text: text }:{
-            to: sender, 
-            from: 'info@avnsmotors.com',
-            subject: `Re: ${topic}`,
-            text: 'Thank you for contacting us. We will contact you as soon as possible.'
-        };
+        const msg = {
+        to: patientemail, 
+        from: process.env.REACT_APP_EMAIL,
+        subject: 'GlucoBasal Assistance Program',//`${name} wants to know about: ${topic}`,
+        text: `Dear ${name}
+        Congratulations! You are eligible for the GlucoBasal Assistance Program! 
+        This will allow you to receive up to a 30 day supply of your GlucoBasal insulin at a participating pharmacy. 
+        Please use this email as an electronic proof of coverage or feel free to print a copy of this email as proof of coverage as no physical proof of coverage will be sent to you. 
+        Here is the information that the participating pharmacy will need:
+        BIN: 980980
+        PCN: ABC123
+        GROUP: GlucoBasal999
+        ID: {SWE000000001}
+        If you have any questions, please feel free to contact us.
+
+        To Your Health,
+        The GlucoBasal Foundation
+        120 Sugarbowl Avenue
+        Sucrose, LA 01234-5678
+        ` }
    
     //Send Email
     sgMail.send(msg)
     .then((msg) => console.log('SENT'));
 });
 
-// to access server run 'nodemon index.js' then click here: http://localhost:4000/
-app.listen(PORT, () => console.log("Running on Port 5000")); 
+// to access server run 'nodemon index.js' then click here: http://localhost:5000/
+app.listen(PORT, () => console.log("Running on Port 5000"));
